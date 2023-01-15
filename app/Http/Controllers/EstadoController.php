@@ -86,8 +86,8 @@ class EstadoController extends Controller
     public function destroy($id)
     {
         try {
-            Estado::find()->delete();
-            return response()->json([]);
+            Estado::find($id)->delete();
+            return response('');
         } catch (\Throwable $th) {
             throw new ExceptionErrorDestroy();
         }
