@@ -15,6 +15,7 @@ class ClienteResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'nome' => $this->nome,
             'nome_fantasia' => $this->nome_fantasia,
             'cpfcnpj' => $this->cpfcnpj,
