@@ -90,7 +90,7 @@ class CidadeController extends Controller
     {
         try {
             Cidade::find($id)->delete();
-            return response('');
+            return response(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorDestroy();
         }
