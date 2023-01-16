@@ -53,6 +53,10 @@ class CidadeController extends Controller
     public function show($id)
     {
         $reg = Cidade::find($id);
+
+        if (!isset($reg))
+            throw new ExceptionNotFound();
+            
         return response()->json(new CidadeResource($reg));
     }
 
