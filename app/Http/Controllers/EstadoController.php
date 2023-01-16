@@ -52,6 +52,10 @@ class EstadoController extends Controller
     public function show($id)
     {
         $reg = Estado::find($id);
+        
+        if (!isset($reg))
+            throw new ExceptionNotFound();
+
         return response()->json(new EstadoResource($reg));
     }
 
