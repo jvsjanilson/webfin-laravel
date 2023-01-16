@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Exceptions\ExceptionErrorCreate;
 use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
+use App\Exceptions\ExceptionNotFound;
+use App\Http\Resources\EstadoCollection;
+use App\Http\Resources\EstadoResource;
 use App\Models\Estado;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +22,7 @@ class EstadoController extends Controller
     public function index()
     {
         $regs = Estado::paginate(config('app.paginate'));
-        return response()->json($regs);
+        return new EstadoCollection($regs);
     }
 
     /**
@@ -49,7 +52,7 @@ class EstadoController extends Controller
     public function show($id)
     {
         $reg = Estado::find($id);
-        return response()->json($reg);
+        return response()->json(new EstadoResource($reg));
     }
 
     /**
@@ -62,15 +65,15 @@ class EstadoController extends Controller
     public function update(Request $request, $id)
     {
         $reg = Estado::find($id);
-        $data = $request->only('uf', 'nome', 'ativo');
+        $data = $request->all();
 
         if (!isset($reg)) {
-            return response()->json(['message' => 'Registro não encontrado.'], Response::HTTP_NOT_FOUND);
+            throw new ExceptionNotFound();
         }
 
         try {
             $reg->update($data);
-            return response()->json([]);
+            return response()->json(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorUpdate();
 
@@ -87,7 +90,7 @@ class EstadoController extends Controller
     {
         try {
             Estado::find($id)->delete();
-            return response('');
+            return response(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorDestroy();
         }
