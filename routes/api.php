@@ -3,6 +3,7 @@
 use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,4 @@ Route::post('logout', [LoginController::class, 'logout']);
 Route::apiResource('/estados', EstadoController::class);
 Route::apiResource('/cidades', CidadeController::class);
 Route::apiResource('/clientes', ClienteController::class);
+Route::apiResource('/fornecedores', FornecedorController::class);
