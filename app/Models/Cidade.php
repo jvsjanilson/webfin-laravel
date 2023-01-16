@@ -15,4 +15,10 @@ class Cidade extends Model
         'estado_id',
         'ativo'
     ];
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class);
+    }
+    
 }
