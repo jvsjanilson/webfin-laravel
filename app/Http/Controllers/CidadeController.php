@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\ExceptionErrorCreate;
 use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
+use App\Exceptions\ExceptionNotFound;
 use App\Http\Resources\CidadeCollection;
 use App\Http\Resources\CidadeResource;
 use App\Models\Cidade;
@@ -68,7 +69,7 @@ class CidadeController extends Controller
         $data = $request->all();
 
         if (!isset($reg)) {
-            return response()->json(['message' => 'Registro não encontrado.'], Response::HTTP_NOT_FOUND);
+            throw new ExceptionNotFound();
         }
 
         try {
