@@ -52,6 +52,9 @@ class ClienteController extends Controller
     public function show($id)
     {
         $reg = Cliente::find($id);
+        if (!isset($reg))
+            throw new ExceptionNotFound();
+
         return response()->json(new ClienteResource($reg));
     }
 
