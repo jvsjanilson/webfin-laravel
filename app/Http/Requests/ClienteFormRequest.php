@@ -59,7 +59,7 @@ class ClienteFormRequest extends FormRequest
     public function attributes()
     {
         return [
-            'nome'      => 'Nome',
+            'nome'      => 'Nome do cliente',
             'cpfcnpj'   => 'CPF/CNPJ',
             'estado_id' => 'Estado',
             'cidade_id' => 'Cidade'
