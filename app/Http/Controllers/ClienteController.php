@@ -6,6 +6,7 @@ use App\Exceptions\ExceptionErrorCreate;
 use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
 use App\Exceptions\ExceptionNotFound;
+use App\Http\Requests\ClienteFormRequest;
 use App\Http\Resources\ClienteCollection;
 use App\Http\Resources\ClienteResource;
 use App\Models\Cliente;
@@ -31,7 +32,7 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClienteFormRequest $request)
     {
         $data = $request->all();
         try {
