@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\ExceptionErrorCreate;
 use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
+use App\Http\Resources\CidadeCollection;
 use App\Models\Cidade;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,8 @@ class CidadeController extends Controller
     public function index()
     {
         $regs = Cidade::paginate(config('app.paginate'));
-        return response()->json($regs);
+        return new CidadeCollection($regs);
+
     }
 
     /**
