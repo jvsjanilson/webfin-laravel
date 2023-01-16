@@ -6,6 +6,7 @@ use App\Exceptions\ExceptionErrorCreate;
 use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
 use App\Http\Resources\CidadeCollection;
+use App\Http\Resources\CidadeResource;
 use App\Models\Cidade;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,7 +52,7 @@ class CidadeController extends Controller
     public function show($id)
     {
         $reg = Cidade::find($id);
-        return response()->json($reg);
+        return response()->json(new CidadeResource($reg));
     }
 
     /**
@@ -64,7 +65,7 @@ class CidadeController extends Controller
     public function update(Request $request, $id)
     {
         $reg = Cidade::find($id);
-        $data = $request->only('nome', 'estado_id', 'capital', 'ativo');
+        $data = $request->all();
 
         if (!isset($reg)) {
             return response()->json(['message' => 'Registro não encontrado.'], Response::HTTP_NOT_FOUND);
@@ -72,7 +73,7 @@ class CidadeController extends Controller
 
         try {
             $reg->update($data);
-            return response()->json([]);
+            return response()->json(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorUpdate();
 
