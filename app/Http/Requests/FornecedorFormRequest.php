@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Fnc\Validador;
 use App\Models\Cidade;
 use App\Models\Estado;
 use App\Models\Fornecedor;
@@ -33,6 +34,9 @@ class FornecedorFormRequest extends FormRequest
                     $reg = Fornecedor::where('cpfcnpj', $value)->first();
                     if (isset($reg)) {
                         $fail("O :attribute já cadastrado.");
+                    }
+                    if (!Validador::cpfcnpj($value)) {
+                        $fail("O :attribute inválido.");
                     }
                 }
             }],
