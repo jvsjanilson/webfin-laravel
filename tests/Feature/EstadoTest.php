@@ -44,4 +44,24 @@ class EstadoTest extends TestCase
 
         $response->assertStatus(204);
     }
+
+    public function test_put_uf_vazia_estado()
+    {
+        $response = $this->put('/api/estados/1',[
+            'uf' => '',
+            'nome'  => 'teste',
+        ]);
+
+        $response->assertStatus(422);
+    }
+
+    public function test_put_nome_vazio_estado()
+    {
+        $response = $this->put('/api/estados/1',[
+            'uf' => 'RN',
+            'nome'  => '',
+        ]);
+
+        $response->assertStatus(422);
+    }
 }
