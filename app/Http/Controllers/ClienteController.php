@@ -7,6 +7,7 @@ use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
 use App\Exceptions\ExceptionNotFound;
 use App\Http\Requests\ClienteFormRequest;
+use App\Http\Requests\ClienteUpdateFormRequest;
 use App\Http\Resources\ClienteCollection;
 use App\Http\Resources\ClienteResource;
 use App\Models\Cliente;
@@ -66,7 +67,7 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClienteUpdateFormRequest $request, $id)
     {
         $reg = Cliente::find($id);
         $data = $request->all();
