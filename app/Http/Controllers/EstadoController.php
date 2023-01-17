@@ -46,7 +46,6 @@ class EstadoController extends Controller
             return response('', Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             throw new ExceptionErrorCreate();
-
         }
     }
 
@@ -87,7 +86,6 @@ class EstadoController extends Controller
             return response()->json(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorUpdate();
-
         }
     }
 

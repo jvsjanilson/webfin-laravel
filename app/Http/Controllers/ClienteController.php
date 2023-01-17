@@ -11,13 +11,11 @@ use App\Http\Requests\ClienteUpdateFormRequest;
 use App\Http\Resources\ClienteCollection;
 use App\Http\Resources\ClienteResource;
 use App\Models\Cliente;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ClienteController extends Controller
 {
     private $model;
-
 
     public function __construct(Cliente $model)
     {
@@ -49,7 +47,6 @@ class ClienteController extends Controller
             return response('', Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             throw new ExceptionErrorCreate();
-
         }
     }
 
@@ -89,7 +86,6 @@ class ClienteController extends Controller
             return response()->json(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorUpdate();
-
         }
     }
 

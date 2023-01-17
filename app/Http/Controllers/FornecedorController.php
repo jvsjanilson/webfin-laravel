@@ -10,7 +10,6 @@ use App\Http\Requests\FornecedorFormRequest;
 use App\Http\Resources\FornecedorCollection;
 use App\Http\Resources\FornecedorResource;
 use App\Models\Fornecedor;
-
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,7 +21,6 @@ class FornecedorController extends Controller
     {
         $this->model = $model;
     }
-
 
    /**
      * Display a listing of the resource.
@@ -49,7 +47,6 @@ class FornecedorController extends Controller
             return response('', Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             throw new ExceptionErrorCreate();
-
         }
     }
 
@@ -89,7 +86,6 @@ class FornecedorController extends Controller
             return response()->json(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorUpdate();
-
         }
     }
 

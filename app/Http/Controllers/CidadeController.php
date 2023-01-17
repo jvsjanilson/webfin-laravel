@@ -14,9 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CidadeController extends Controller
 {
-
     private $model;
-
 
     public function __construct(Cidade $model)
     {
@@ -32,7 +30,6 @@ class CidadeController extends Controller
     {
         $regs = $this->model->paginate(config('app.paginate'));
         return new CidadeCollection($regs);
-
     }
 
     /**
@@ -49,7 +46,6 @@ class CidadeController extends Controller
             return response('', Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             throw new ExceptionErrorCreate();
-
         }
     }
 
