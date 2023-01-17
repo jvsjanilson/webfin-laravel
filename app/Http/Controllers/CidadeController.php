@@ -40,7 +40,7 @@ class CidadeController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only('nome', 'estado_id', 'capital', 'ativo');
+        $data = $request->all();
         try {
             $this->model->create($data);
             return response('', Response::HTTP_CREATED);
