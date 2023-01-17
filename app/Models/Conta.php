@@ -13,6 +13,7 @@ class Conta extends Model
         'numero_banco',
         'numero_agencia',
         'numero_conta',
+        'descricao',
         'tipo_conta',
         'data_abertura',
         'saldo',
