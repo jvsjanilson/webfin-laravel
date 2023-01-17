@@ -30,6 +30,9 @@ class FornecedorUpdateFormRequest extends FormRequest
         return [
             'cpfcnpj' => [function($attribute, $value, $fail) {
                 if ($value != "") {
+
+                
+
                     $reg = Fornecedor::where('cpfcnpj', $value)->first();
                     if (isset($reg)) {
                         $fail("O :attribute já cadastrado.");
