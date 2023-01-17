@@ -43,4 +43,24 @@ class CidadeTest extends TestCase
         $response->assertStatus(204);
     }
 
+    public function test_post_estado_required_cidade()
+    {
+        $response = $this->post('/api/cidades',[
+            'nome'  => 'Nat',
+            'ativo' => true
+        ]);
+
+        $response->assertStatus(422);
+    }
+
+    public function test_post_nome_required_cidade()
+    {
+        $response = $this->post('/api/cidades',[
+            'estado_id' => 1,
+            'ativo' => true
+        ]);
+
+        $response->assertStatus(422);
+    }
+
 }
