@@ -5,11 +5,20 @@
          colors="true"
 >
     <testsuites>
-        <testsuite name="Unit">
+        <!-- <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Feature">
+        </testsuite> -->
+        <!-- <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
+        </testsuite> -->
+        <testsuite>
+            <file>./tests/Feature/EstadoTest.php</file>
+            <file>./tests/Feature/CidadeTest.php</file>
+             <!-- <file>./tests/Feature/CidadeTest.php</file> -->
+
+             <!-- Deixar por ultimo -->
+             <!-- <file>./tests/Feature/DestroyTest.php</file> -->
+
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
