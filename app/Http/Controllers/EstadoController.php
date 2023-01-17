@@ -6,6 +6,8 @@ use App\Exceptions\ExceptionErrorCreate;
 use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
 use App\Exceptions\ExceptionNotFound;
+use App\Http\Requests\EstadoFormRequest;
+use App\Http\Requests\EstadoUpdateFormRequest;
 use App\Http\Resources\EstadoCollection;
 use App\Http\Resources\EstadoResource;
 use App\Models\Estado;
@@ -38,9 +40,9 @@ class EstadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EstadoFormRequest $request)
     {
-        $data = $request->only('uf','nome', 'ativo');
+        $data = $request->all();
         try {
             $this->model->create($data);
             return response('', Response::HTTP_CREATED);
@@ -72,7 +74,7 @@ class EstadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EstadoUpdateFormRequest $request, $id)
     {
         $reg = $this->model->find($id);
         $data = $request->all();
@@ -80,7 +82,7 @@ class EstadoController extends Controller
         if (!isset($reg)) {
             throw new ExceptionNotFound();
         }
-        
+
         if (count($data) == 0) {
             throw new ExceptionErrorUpdate("Formado de dados passado invalido(s).");
         }
