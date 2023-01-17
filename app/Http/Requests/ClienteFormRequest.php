@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Fnc\Validador;
 use App\Models\Cidade;
 use App\Models\Cliente;
 use App\Models\Estado;
@@ -33,6 +34,10 @@ class ClienteFormRequest extends FormRequest
                     $reg = Cliente::where('cpfcnpj', $value)->first();
                     if (isset($reg)) {
                         $fail("O :attribute já cadastrado.");
+                    }
+
+                    if (!Validador::cpfcnpj($value)) {
+                        $fail("O :attribute inválido.");
                     }
                 }
             }],
