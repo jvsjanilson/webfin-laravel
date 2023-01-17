@@ -18,6 +18,7 @@ class CreateContasTable extends Migration
             $table->string('numero_banco',3)->nullable();
             $table->string('numero_agencia',15)->nullable();
             $table->string('numero_conta',30)->nullable();
+            $table->string('descricao',60)->nullable();
             $table->tinyInteger('tipo_conta')->nullable()->default(1); //1-conta corrente, 2-conta poupança
             $table->date('data_abertura')->nullable();
             $table->decimal('saldo',15,2)->nullable()->default(0);
