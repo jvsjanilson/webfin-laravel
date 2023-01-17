@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Exceptions\ExceptionNotFound;
 use App\Fnc\Validador;
 use App\Models\Cidade;
 use App\Models\Cliente;
@@ -30,7 +31,17 @@ class ClienteUpdateFormRequest extends FormRequest
         return [
             'cpfcnpj' => [function($attribute, $value, $fail) {
                 if ($value != "") {
-                    $reg = Cliente::where('cpfcnpj', $value)->first();
+
+                    // $cliente = Cliente::find($this->route('cliente'));
+
+                    // if (!isset($cliente)) {
+                    //     throw new ExceptionNotFound();
+                    // }
+
+                    $reg = Cliente::where('cpfcnpj', $value)
+                        ->where('clientes.id', '<>', $this->route('cliente'))
+                        ->first();
+
                     if (isset($reg)) {
                         $fail("O :attribute já cadastrado.");
                     }
