@@ -6,6 +6,8 @@ use App\Exceptions\ExceptionErrorCreate;
 use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
 use App\Exceptions\ExceptionNotFound;
+use App\Http\Requests\CidadeFormRequest;
+use App\Http\Requests\CidadeUpdateFormRequest;
 use App\Http\Resources\CidadeCollection;
 use App\Http\Resources\CidadeResource;
 use App\Models\Cidade;
@@ -38,7 +40,7 @@ class CidadeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CidadeFormRequest $request)
     {
         $data = $request->all();
         try {
@@ -72,7 +74,7 @@ class CidadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CidadeUpdateFormRequest $request, $id)
     {
         $reg = $this->model->find($id);
         $data = $request->all();
