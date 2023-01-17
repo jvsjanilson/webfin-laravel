@@ -7,9 +7,11 @@ use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
 use App\Exceptions\ExceptionNotFound;
 use App\Http\Requests\FornecedorFormRequest;
+use App\Http\Requests\FornecedorUpdateFormRequest;
 use App\Http\Resources\FornecedorCollection;
 use App\Http\Resources\FornecedorResource;
 use App\Models\Fornecedor;
+use Exception;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -72,13 +74,19 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FornecedorUpdateFormRequest $request, $id)
     {
         $reg = $this->model->find($id);
         $data = $request->all();
 
+
+
         if (!isset($reg)) {
             throw new ExceptionNotFound();
+        }
+
+        if (count($data) == 0) {
+            throw new ExceptionErrorUpdate("Formado de dados passado invalido(s).");
         }
 
         try {

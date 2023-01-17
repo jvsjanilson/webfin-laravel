@@ -81,6 +81,10 @@ class ClienteController extends Controller
             throw new ExceptionNotFound();
         }
 
+        if (count($data) == 0) {
+            throw new ExceptionErrorUpdate("Formado de dados passado invalido(s).");
+        }
+
         try {
             $reg->update($data);
             return response()->json(null, Response::HTTP_NO_CONTENT);

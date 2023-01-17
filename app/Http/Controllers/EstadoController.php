@@ -80,6 +80,10 @@ class EstadoController extends Controller
         if (!isset($reg)) {
             throw new ExceptionNotFound();
         }
+        
+        if (count($data) == 0) {
+            throw new ExceptionErrorUpdate("Formado de dados passado invalido(s).");
+        }
 
         try {
             $reg->update($data);
