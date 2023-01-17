@@ -16,6 +16,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ClienteController extends Controller
 {
+    private $model;
+
+
+    public function __construct(Cliente $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +31,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $regs = Cliente::paginate(config('app.paginate'));
+        $regs = $this->model->paginate(config('app.paginate'));
         return new ClienteCollection($regs);
     }
 
@@ -37,7 +45,7 @@ class ClienteController extends Controller
     {
         $data = $request->all();
         try {
-            Cliente::create($data);
+            $this->model->create($data);
             return response('', Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             throw new ExceptionErrorCreate();
@@ -53,7 +61,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        $reg = Cliente::find($id);
+        $reg = $this->model->find($id);
         if (!isset($reg))
             throw new ExceptionNotFound();
 
@@ -69,7 +77,7 @@ class ClienteController extends Controller
      */
     public function update(ClienteUpdateFormRequest $request, $id)
     {
-        $reg = Cliente::find($id);
+        $reg = $this->model->find($id);
         $data = $request->all();
 
         if (!isset($reg)) {
@@ -94,7 +102,7 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         try {
-            Cliente::find($id)->delete();
+            $this->model->find($id)->delete();
             return response(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorDestroy();

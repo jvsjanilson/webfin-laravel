@@ -14,6 +14,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EstadoController extends Controller
 {
+    private $model;
+
+    public function __construct(Estado $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +28,7 @@ class EstadoController extends Controller
      */
     public function index()
     {
-        $regs = Estado::paginate(config('app.paginate'));
+        $regs = $this->model->paginate(config('app.paginate'));
         return new EstadoCollection($regs);
     }
 
@@ -35,7 +42,7 @@ class EstadoController extends Controller
     {
         $data = $request->only('uf','nome', 'ativo');
         try {
-            Estado::create($data);
+            $this->model->create($data);
             return response('', Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             throw new ExceptionErrorCreate();
@@ -51,8 +58,8 @@ class EstadoController extends Controller
      */
     public function show($id)
     {
-        $reg = Estado::find($id);
-        
+        $reg = $this->model->find($id);
+
         if (!isset($reg))
             throw new ExceptionNotFound();
 
@@ -68,7 +75,7 @@ class EstadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $reg = Estado::find($id);
+        $reg = $this->model->find($id);
         $data = $request->all();
 
         if (!isset($reg)) {
@@ -93,7 +100,7 @@ class EstadoController extends Controller
     public function destroy($id)
     {
         try {
-            Estado::find($id)->delete();
+            $this->model->find($id)->delete();
             return response(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorDestroy();

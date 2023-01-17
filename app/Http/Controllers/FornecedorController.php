@@ -16,6 +16,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FornecedorController extends Controller
 {
+    private $model;
+
+    public function __construct(Fornecedor $model)
+    {
+        $this->model = $model;
+    }
+
+
    /**
      * Display a listing of the resource.
      *
@@ -23,7 +31,7 @@ class FornecedorController extends Controller
      */
     public function index()
     {
-        $regs = Fornecedor::paginate(config('app.paginate'));
+        $regs = $this->model->paginate(config('app.paginate'));
         return new FornecedorCollection($regs);
     }
 
@@ -37,7 +45,7 @@ class FornecedorController extends Controller
     {
         $data = $request->all();
         try {
-            Fornecedor::create($data);
+            $this->model->create($data);
             return response('', Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             throw new ExceptionErrorCreate();
@@ -53,7 +61,7 @@ class FornecedorController extends Controller
      */
     public function show($id)
     {
-        $reg = Fornecedor::find($id);
+        $reg = $this->model->find($id);
         if (!isset($reg))
             throw new ExceptionNotFound();
 
@@ -69,7 +77,7 @@ class FornecedorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $reg = Fornecedor::find($id);
+        $reg = $this->model->find($id);
         $data = $request->all();
 
         if (!isset($reg)) {
@@ -94,7 +102,7 @@ class FornecedorController extends Controller
     public function destroy($id)
     {
         try {
-            Fornecedor::find($id)->delete();
+            $this->model->find($id)->delete();
             return response(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorDestroy();

@@ -14,6 +14,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CidadeController extends Controller
 {
+
+    private $model;
+
+
+    public function __construct(Cidade $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +30,7 @@ class CidadeController extends Controller
      */
     public function index()
     {
-        $regs = Cidade::paginate(config('app.paginate'));
+        $regs = $this->model->paginate(config('app.paginate'));
         return new CidadeCollection($regs);
 
     }
@@ -36,7 +45,7 @@ class CidadeController extends Controller
     {
         $data = $request->only('nome', 'estado_id', 'capital', 'ativo');
         try {
-            Cidade::create($data);
+            $this->model->create($data);
             return response('', Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             throw new ExceptionErrorCreate();
@@ -52,11 +61,11 @@ class CidadeController extends Controller
      */
     public function show($id)
     {
-        $reg = Cidade::find($id);
+        $reg = $this->model->find($id);
 
         if (!isset($reg))
             throw new ExceptionNotFound();
-            
+
         return response()->json(new CidadeResource($reg));
     }
 
@@ -69,7 +78,7 @@ class CidadeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $reg = Cidade::find($id);
+        $reg = $this->model->find($id);
         $data = $request->all();
 
         if (!isset($reg)) {
@@ -81,7 +90,6 @@ class CidadeController extends Controller
             return response()->json(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorUpdate();
-
         }
     }
 
@@ -94,7 +102,7 @@ class CidadeController extends Controller
     public function destroy($id)
     {
         try {
-            Cidade::find($id)->delete();
+            $this->model->find($id)->delete();
             return response(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorDestroy();
