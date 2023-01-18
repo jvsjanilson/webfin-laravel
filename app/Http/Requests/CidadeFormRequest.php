@@ -24,8 +24,8 @@ class CidadeFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => ['required'],
-            'estado_id' => ['required']
+            'nome' => ['required', 'max:60'],
+            'estado_id' => ['required','integer']
         ];
     }
 
