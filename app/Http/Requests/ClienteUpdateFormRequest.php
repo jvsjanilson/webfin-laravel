@@ -29,14 +29,9 @@ class ClienteUpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'cpfcnpj' => [function($attribute, $value, $fail) {
+            'cpfcnpj' => ['filled',
+                function($attribute, $value, $fail) {
                 if ($value != "") {
-
-                    // $cliente = Cliente::find($this->route('cliente'));
-
-                    // if (!isset($cliente)) {
-                    //     throw new ExceptionNotFound();
-                    // }
 
                     $reg = Cliente::where('cpfcnpj', $value)
                         ->where('clientes.id', '<>', $this->route('cliente'))
@@ -51,7 +46,7 @@ class ClienteUpdateFormRequest extends FormRequest
                     }
                 }
             }],
-            'estado_id' => [
+            'estado_id' => ['filled',
                 function ($attribute, $value, $fail) {
                     if ($value != "") {
                         $reg = Estado::find($value);
@@ -61,7 +56,7 @@ class ClienteUpdateFormRequest extends FormRequest
                     }
                 }
             ],
-            'cidade_id' => [
+            'cidade_id' => ['filled',
                 function ($attribute, $value, $fail) {
                     if ($value != "") {
                         $reg = Cidade::find($value);

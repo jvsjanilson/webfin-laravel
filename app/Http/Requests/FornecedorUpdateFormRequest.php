@@ -28,11 +28,9 @@ class FornecedorUpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'cpfcnpj' => [function($attribute, $value, $fail) {
+            'cpfcnpj' => ['filled',
+                function($attribute, $value, $fail) {
                 if ($value != "") {
-
-                
-
                     $reg = Fornecedor::where('cpfcnpj', $value)->first();
                     if (isset($reg)) {
                         $fail("O :attribute já cadastrado.");
@@ -43,7 +41,8 @@ class FornecedorUpdateFormRequest extends FormRequest
                     }
                 }
             }],
-            'estado_id' => [
+
+            'estado_id' => ['filled',
                 function ($attribute, $value, $fail) {
                     if ($value != "") {
                         $reg = Estado::find($value);
@@ -53,7 +52,8 @@ class FornecedorUpdateFormRequest extends FormRequest
                     }
                 }
             ],
-            'cidade_id' => [
+
+            'cidade_id' => ['filled',
                 function ($attribute, $value, $fail) {
                     if ($value != "") {
                         $reg = Cidade::find($value);

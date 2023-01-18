@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Exceptions\ExceptionNotFound;
+
 use App\Models\Estado;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,26 +26,13 @@ class CidadeUpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => [
+            'nome' => ['filled', 'max:60'],
+            'estado_id' => ['integer', 'filled',
                 function($attribute, $value, $fail)
                 {
-                    if ($value == "") {
-
-                        $fail("O :attribute não pode ser vazio.");
-                    }
-                }
-            ],
-            'estado_id' => [
-                function($attribute, $value, $fail)
-                {
-                    if ($value == "") {
-
-                        $fail("O :attribute não pode ser vazio.");
-                    } else {
-                        $estado = Estado::find($value);
-                        if (!isset($estado))
-                            $fail("Estado não é valido.");
-                    }
+                    $estado = Estado::find($value);
+                    if (!isset($estado))
+                        $fail("Estado não é valido.");
                 }
             ]
         ];

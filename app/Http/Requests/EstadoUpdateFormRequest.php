@@ -26,14 +26,7 @@ class EstadoUpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'uf' => [
-                function($attribute, $value, $fail)
-                {
-                    if ($value == "") {
-                        $fail("O :attribute não pode ser vazio.");
-                    }
-                },
-
+            'uf' => [ 'filled',
                 function($attribute, $value, $fail)
                 {
                     if ($value != "") {
@@ -47,15 +40,7 @@ class EstadoUpdateFormRequest extends FormRequest
                     }
                 },
             ],
-            'nome' => [
-                function($attribute, $value, $fail)
-                {
-                    if ($value == "") {
-
-                        $fail("O :attribute não pode ser vazio.");
-                    }
-                }
-            ]
+            'nome' => ['filled']
         ];
     }
 
