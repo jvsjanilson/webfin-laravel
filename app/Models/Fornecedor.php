@@ -25,4 +25,17 @@ class Fornecedor extends Model
         'email',
         'ativo'
     ];
+
+    /**
+     * Relacionamentos
+     */
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class);
+    }
+
+    public function cidade()
+    {
+        return $this->belongsTo(Cidade::class);
+    }
 }
