@@ -6,6 +6,8 @@ use App\Exceptions\ExceptionErrorCreate;
 use App\Exceptions\ExceptionErrorDestroy;
 use App\Exceptions\ExceptionErrorUpdate;
 use App\Exceptions\ExceptionNotFound;
+use App\Http\Requests\ContaFormRequest;
+use App\Http\Requests\ContaUpdateFormRequest;
 use App\Http\Resources\ContaCollection;
 use App\Http\Resources\ContaResource;
 use App\Models\Conta;
@@ -39,7 +41,7 @@ class ContaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContaFormRequest $request)
     {
         $data = $request->all();
 
@@ -74,7 +76,7 @@ class ContaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ContaUpdateFormRequest $request, $id)
     {
         $reg = $this->model->find($id);
         $data = $request->all();
