@@ -79,4 +79,14 @@ class ClienteTest extends TestCase
 
         $response->assertStatus(422);
     }
+
+
+    public function test_put_cpfcnpj_invalido_cliente()
+    {
+        $response = $this->put('/api/clientes/1',[
+            'cpfcnpj' => '29140433844',
+        ]);
+
+        $response->assertStatus(422);
+    }
 }
