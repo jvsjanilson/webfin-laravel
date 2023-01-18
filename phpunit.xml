@@ -15,6 +15,7 @@
             <file>./tests/Feature/EstadoTest.php</file>
             <file>./tests/Feature/CidadeTest.php</file>
             <file>./tests/Feature/ContaTest.php</file>
+            <file>./tests/Feature/ClienteTest.php</file>
              <!-- <file>./tests/Feature/CidadeTest.php</file> -->
 
              <!-- Deixar por ultimo -->
