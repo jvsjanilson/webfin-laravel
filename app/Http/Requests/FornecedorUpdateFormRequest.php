@@ -28,6 +28,7 @@ class FornecedorUpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
+            'nome' => ['filled'],
             'cpfcnpj' => ['filled',
                 function($attribute, $value, $fail) {
                 if ($value != "") {
