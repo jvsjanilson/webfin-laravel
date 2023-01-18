@@ -43,6 +43,24 @@ class CidadeTest extends TestCase
         $response->assertStatus(204);
     }
 
+    public function test_put_nome_vazio_cidade()
+    {
+        $response = $this->put('/api/cidades/1',[
+            'nome'  => '',
+        ]);
+
+        $response->assertStatus(422);
+    }
+
+    public function test_put_estado_vazio_cidade()
+    {
+        $response = $this->put('/api/cidades/1',[
+            'estado_id'  => '',
+        ]);
+
+        $response->assertStatus(422);
+    }
+
     public function test_post_estado_required_cidade()
     {
         $response = $this->post('/api/cidades',[
