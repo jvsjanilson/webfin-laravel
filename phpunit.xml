@@ -17,6 +17,7 @@
             <file>./tests/Feature/ContaTest.php</file>
             <file>./tests/Feature/ClienteTest.php</file>
             <file>./tests/Feature/FornecedorTest.php</file>
+            <file>./tests/Feature/ContaReceberTest.php</file>
              <!-- <file>./tests/Feature/CidadeTest.php</file> -->
 
              <!-- Deixar por ultimo -->
