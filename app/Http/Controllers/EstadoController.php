@@ -104,7 +104,7 @@ class EstadoController extends Controller
     public function destroy($id)
     {
         try {
-            $this->model->find($id)->delete();
+            $this->model->destroy($id);
             return response(null, Response::HTTP_NO_CONTENT);
         } catch (\Throwable $th) {
             throw new ExceptionErrorDestroy();
