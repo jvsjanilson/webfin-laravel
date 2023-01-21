@@ -6,8 +6,6 @@ use App\Http\Controllers\ContaController;
 use App\Http\Controllers\ContaReceberController;
 use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\FornecedorController;
-use App\Http\Controllers\LoginController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,18 +19,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return 'ola';
+//    // return $request->user();
+// });
+
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResource('/estados', EstadoController::class);
+    Route::apiResource('/cidades', CidadeController::class);
+    Route::apiResource('/clientes', ClienteController::class);
+    Route::apiResource('/fornecedores', FornecedorController::class);
+    Route::apiResource('/contas', ContaController::class);
+    Route::apiResource('/contarecebers', ContaReceberController::class);
 });
-
-Route::post('login', [LoginController::class, 'login']);
-Route::post('logout', [LoginController::class, 'logout']);
-
-
-
-Route::apiResource('/estados', EstadoController::class);
-Route::apiResource('/cidades', CidadeController::class);
-Route::apiResource('/clientes', ClienteController::class);
-Route::apiResource('/fornecedores', FornecedorController::class);
-Route::apiResource('/contas', ContaController::class);
-Route::apiResource('/contarecebers', ContaReceberController::class);
