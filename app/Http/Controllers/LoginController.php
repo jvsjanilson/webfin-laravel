@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
@@ -17,16 +18,12 @@ class LoginController extends Controller
 
         if (!Auth::attempt($credentials))
         {
-            throw ValidationException::withMessages([
-                'email' => [
-                    __('auth.failed')
-                ]
-            ]);
+            return response()->json(['message' => 'Login inválido.'],Response::HTTP_UNAUTHORIZED);
         }
+        
         return response()->json([
             'name' => $request->user()->name,
-            'email' => $request->user()->email,
-
+            'email' => $request->user()->email
         ]);
     }
 
