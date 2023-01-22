@@ -34,6 +34,9 @@ class CreateFornecedorsTable extends Migration
             $table->string('celular',20)->nullable()->default('');
             $table->string('email')->nullable()->default('');
 
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->boolean('ativo')->nullable()->default(1);
             $table->timestamps();
         });

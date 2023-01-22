@@ -22,6 +22,8 @@ class CreateContasTable extends Migration
             $table->tinyInteger('tipo_conta')->nullable()->default(1); //1-conta corrente, 2-conta poupança
             $table->date('data_abertura')->nullable();
             $table->decimal('saldo',15,2)->nullable()->default(0);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->boolean('ativo')->nullable()->default(1);
             $table->timestamps();
         });

@@ -25,10 +25,12 @@ class CreateContaRecebersTable extends Migration
             $table->date('data_pagamento')->nullable();
             $table->unsignedBigInteger('conta_id');
             $table->unsignedBigInteger('cliente_id');
+            $table->unsignedBigInteger('user_id');
 
             //foreign keys
             $table->foreign('conta_id')->references('id')->on('contas')->cascade();
             $table->foreign('cliente_id')->references('id')->on('clientes')->cascade();
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });
