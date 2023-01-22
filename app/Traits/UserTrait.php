@@ -5,7 +5,7 @@ namespace App\Traits;
 use App\Observers\UserObserver;
 use App\Scopes\UserScope;
 
-trait TenantEmpresaUserTrait
+trait UserTrait
 {
     public static function boot()
     {
