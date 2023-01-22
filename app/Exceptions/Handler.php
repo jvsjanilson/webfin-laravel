@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
             }
 
             if ($e instanceof RouteNotFoundException) {
-                return response()->json(['message'=> 'Error'], Response::HTTP_BAD_REQUEST);
+                return response()->json(['message'=> 'Acesso não autorizado.'], Response::HTTP_UNAUTHORIZED);
             }
 
         }
