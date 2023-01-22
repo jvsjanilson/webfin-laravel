@@ -23,6 +23,7 @@ class Fornecedor extends Model
         'fone',
         'celular',
         'email',
+        'user_id',
         'ativo'
     ];
 

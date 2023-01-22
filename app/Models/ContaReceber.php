@@ -20,5 +20,6 @@ class ContaReceber extends Model
         'data_pagamento',
         'conta_id',
         'cliente_id',
+        'user_id',
     ];
 }

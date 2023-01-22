@@ -17,6 +17,7 @@ class Conta extends Model
         'tipo_conta',
         'data_abertura',
         'saldo',
+        'user_id',
         'ativo'
     ];
 }

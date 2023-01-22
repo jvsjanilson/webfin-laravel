@@ -23,6 +23,7 @@ class Cliente extends Model
         'fone',
         'celular',
         'email',
+        'user_id',
         'ativo'
     ];
 
