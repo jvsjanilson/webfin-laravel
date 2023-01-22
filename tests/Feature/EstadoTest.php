@@ -10,7 +10,9 @@ class EstadoTest extends TestCase
 
     public function test_get_estados()
     {
-        Artisan::call('migrate:fresh');
+        Artisan::call('migrate:fresh', [
+            '--seeder' => 'UserSeeder',
+        ]);
 
         $response = $this->get('/api/estados');
 
