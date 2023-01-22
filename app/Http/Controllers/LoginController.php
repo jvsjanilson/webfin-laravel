@@ -23,7 +23,11 @@ class LoginController extends Controller
                 ]
             ]);
         }
-        return $request->user();
+        return response()->json([
+            'name' => $request->user()->name,
+            'email' => $request->user()->email,
+
+        ]);
     }
 
     public function logout()
