@@ -24,6 +24,7 @@ class ContaReceberTest extends TestCase
             'conta_id' => 1,
             'cliente_id' => 1,
             'valor' => 100.50,
+            'user_id' => 1
         ]);
 
         $response = $this->post('/api/contarecebers',[
@@ -33,6 +34,7 @@ class ContaReceberTest extends TestCase
             'conta_id' => 1,
             'cliente_id' => 1,
             'valor' => 150.50,
+            'user_id' => 1
         ]);
 
         $response->assertStatus(201);
@@ -46,6 +48,7 @@ class ContaReceberTest extends TestCase
             'conta_id' => 1,
             'cliente_id' => 1,
             'valor' => 100.50,
+            'user_id' => 1
         ]);
 
         $response->assertStatus(422);
@@ -59,6 +62,7 @@ class ContaReceberTest extends TestCase
             'conta_id' => 1,
             'cliente_id' => 1,
             'valor' => 100.50,
+            'user_id' => 1
         ]);
 
         $response->assertStatus(422);
@@ -72,6 +76,7 @@ class ContaReceberTest extends TestCase
             'conta_id' => 1,
             'cliente_id' => 1,
             'valor' => 100.50,
+            'user_id' => 1
         ]);
 
         $response->assertStatus(422);
@@ -85,6 +90,7 @@ class ContaReceberTest extends TestCase
             'vencimento' => '2023-02-19',
             'cliente_id' => 1,
             'valor' => 100.50,
+            'user_id' => 1
         ]);
 
         $response->assertStatus(422);
@@ -98,6 +104,7 @@ class ContaReceberTest extends TestCase
             'vencimento' => '2023-02-19',
             'conta_id' => 1,
             'valor' => 100.50,
+            'user_id' => 1
         ]);
 
         $response->assertStatus(422);
@@ -174,6 +181,7 @@ class ContaReceberTest extends TestCase
             'conta_id' => 1,
             'cliente_id' => 1,
             'valor' => 100.50,
+            'user_id' => 1
         ]);
 
         $response->assertStatus(422);

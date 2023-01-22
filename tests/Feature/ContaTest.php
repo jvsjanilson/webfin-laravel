@@ -24,6 +24,7 @@ class ContaTest extends TestCase
             'tipo_conta' => 1,
             'data_abertura' => Carbon::now()->format('Y-m-d'),
             'saldo' => 100,
+            'user_id' => 1
         ]);
 
         $response->assertStatus(201);
