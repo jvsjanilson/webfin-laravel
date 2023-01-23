@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\UserTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Fornecedor extends Model
 {
     use HasFactory;
+    use UserTrait;
 
     public $fillable = [
         'nome',
