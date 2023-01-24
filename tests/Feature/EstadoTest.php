@@ -65,4 +65,15 @@ class EstadoTest extends TestCase
 
         $response->assertStatus(422);
     }
+
+    public function test_post_unique_uf_estado()
+    {
+        $response = $this->post('/api/estados',[
+            'uf'    => 'RN',
+            'nome'  => 'Rio Grande do Norte',
+            'ativo' => true
+        ]);
+
+        $response->assertStatus(422);
+    }
 }
