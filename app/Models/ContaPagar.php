@@ -25,4 +25,19 @@ class ContaPagar extends Model
         'fornecedor_id',
         'user_id',
     ];
+
+    /**
+     * Relacionamentos
+     */
+
+    public function conta()
+    {
+        return $this->belongsTo(Conta::class);
+    }
+
+    public function fornecedor()
+    {
+        return $this->belongsTo(Fornecedor::class);
+    }
+
 }
