@@ -33,6 +33,13 @@ use Illuminate\Support\Facades\Route;
     Route::apiResource('/clientes', ClienteController::class);
     Route::apiResource('/fornecedores', FornecedorController::class);
     Route::apiResource('/contas', ContaController::class);
+
     Route::apiResource('/contarecebers', ContaReceberController::class);
+    Route::put('/contarecebers/baixar/{id}', [ContaReceberController::class, 'baixar']);
+    Route::put('/contarecebers/estornar/{id}', [ContaReceberController::class, 'estornar']);
+
     Route::apiResource('/contapagars', ContaPagarController::class);
+    Route::put('/contapagars/baixar/{id}', [ContaPagarController::class, 'baixar']);
+    Route::put('/contapagars/estornar/{id}', [ContaPagarController::class, 'estornar']);
+
 // });
