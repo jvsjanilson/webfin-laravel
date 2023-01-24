@@ -22,7 +22,6 @@ class CreateContaPagarsTable extends Migration
             $table->decimal('desconto', 15,2)->nullable()->default(0);
             $table->decimal('juros', 15,2)->nullable()->default(0);
             $table->decimal('multa', 15,2)->nullable()->default(0);
-            $table->decimal('valor_pagto', 15,2)->default(0);
             $table->date('data_pagamento')->nullable();
             $table->unsignedBigInteger('conta_id');
             $table->unsignedBigInteger('fornecedor_id');
