@@ -16,13 +16,22 @@ class ContaReceber extends Model
         'emissao',
         'vencimento',
         'valor',
-        // 'desconto',
-        // 'juros',
-        // 'multa',
-        // 'data_pagamento',
-        // 'valor_pago',
         'conta_id',
         'cliente_id',
         'user_id',
     ];
+
+    /**
+     * Relacionamentos
+     */
+
+    public function conta()
+    {
+        return $this->belongsTo(Conta::class);
+    }
+
+    public function fornecedor()
+    {
+        return $this->belongsTo(Fornecedor::class);
+    }
 }
