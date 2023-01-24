@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -269,5 +270,33 @@ class ContaReceberTest extends TestCase
         $response->assertStatus(204);
     }
 
+    public function test_baixar_contareceber()
+    {
+        $response = $this->put('/api/contarecebers/baixar/1', [
+            "data_pagamento" => Carbon::now()->format('Y-m-d')
+        ]);
+        $response->assertStatus(200);
+    }
+
+    public function test_baixar_error_contareceber()
+    {
+        $response = $this->put('/api/contarecebers/baixar/1', [
+            "data_pagamento" => Carbon::now()->format('Y-m-d')
+        ]);
+
+        $response->assertStatus(400);
+    }
+
+    public function test_estornar_contareceber()
+    {
+        $response = $this->put('/api/contarecebers/estornar/1');
+        $response->assertStatus(200);
+    }
+
+    public function test_estornar_error_contareceber()
+    {
+        $response = $this->put('/api/contarecebers/estornar/1');
+        $response->assertStatus(400);
+    }
 
 }
