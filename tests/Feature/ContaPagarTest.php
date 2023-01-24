@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -272,5 +273,34 @@ class ContaPagarTest extends TestCase
         $response = $this->delete('/api/contapagars/2');
 
         $response->assertStatus(204);
+    }
+
+    public function test_baixar_contapagar()
+    {
+        $response = $this->put('/api/contapagars/baixar/1', [
+            "data_pagamento" => Carbon::now()->format('Y-m-d')
+        ]);
+        $response->assertStatus(200);
+    }
+
+    public function test_baixar_error_contapagar()
+    {
+        $response = $this->put('/api/contapagars/baixar/1', [
+            "data_pagamento" => Carbon::now()->format('Y-m-d')
+        ]);
+
+        $response->assertStatus(400);
+    }
+
+    public function test_estornar_contapagar()
+    {
+        $response = $this->put('/api/contapagars/estornar/1');
+        $response->assertStatus(200);
+    }
+
+    public function test_estornar_error_contapagar()
+    {
+        $response = $this->put('/api/contapagars/estornar/1');
+        $response->assertStatus(400);
     }
 }
