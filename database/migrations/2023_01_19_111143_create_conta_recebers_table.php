@@ -22,10 +22,12 @@ class CreateContaRecebersTable extends Migration
             $table->decimal('desconto', 15,2)->nullable()->default(0);
             $table->decimal('juros', 15,2)->nullable()->default(0);
             $table->decimal('multa', 15,2)->nullable()->default(0);
+            $table->decimal('valor_pagto', 15,2)->default(0);
             $table->date('data_pagamento')->nullable();
             $table->unsignedBigInteger('conta_id');
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('user_id');
+
 
             //foreign keys
             $table->foreign('conta_id')->references('id')->on('contas')->cascade();
