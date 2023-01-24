@@ -129,6 +129,9 @@ class ContaPagarController extends Controller
         if (!isset($reg))
             throw new ExceptionNotFound();
 
+        if (!isset($reg->data_pagamento))
+            throw new ExceptionErrorEstorno("Título já estornado.");
+
         try {
             $reg->data_pagamento = null;
             $valor_pago     = ($reg->valor + $reg->juros + $reg->multa-$reg->desconto);
