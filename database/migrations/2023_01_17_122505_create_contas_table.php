@@ -15,7 +15,7 @@ class CreateContasTable extends Migration
     {
         Schema::create('contas', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_banco',3)->nullable();
+            $table->string('numero_banco',4)->nullable();
             $table->string('numero_agencia',15)->nullable();
             $table->string('numero_conta',30)->nullable();
             $table->string('descricao',60)->nullable();
