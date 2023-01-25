@@ -12,7 +12,6 @@ class CidadeTest extends TestCase
     public function test_get_cidades()
     {
         $response = $this->get('/api/cidades');
-
         $response->assertStatus(200);
     }
 
@@ -30,7 +29,6 @@ class CidadeTest extends TestCase
     public function test_get_cidade()
     {
         $response = $this->get('/api/cidades/1');
-
         $response->assertStatus(200);
     }
 

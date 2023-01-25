@@ -24,19 +24,19 @@ class ContaPagarTest extends TestCase
     public function test_post_contapagar()
     {
         $response = $this->post('/api/contapagars',[
-            'documento' => '2023-1000',
-            'emissao' => '2023-01-19',
-            'vencimento' => '2023-02-19',
-            'conta_id' => 1,
+            'documento'     => '2023-1000',
+            'emissao'       => Carbon::now()->format('Y-m-d'),
+            'vencimento'    => Carbon::now()->addMonth(1)->format('Y-m-d'),
+            'conta_id'      => 1,
             'fornecedor_id' => 1,
-            'valor' => 100.50,
-            'user_id' => 1
+            'valor'         => 100.50,
+            'user_id'       => 1
         ]);
 
         $response = $this->post('/api/contapagars',[
             'documento' => '2023-2000',
-            'emissao' => '2023-02-19',
-            'vencimento' => '2023-03-19',
+            'emissao' => Carbon::now()->format('Y-m-d'),
+            'vencimento' => Carbon::now()->addMonth(1)->format('Y-m-d'),
             'conta_id' => 1,
             'fornecedor_id' => 1,
             'valor' => 150.50,
@@ -49,8 +49,8 @@ class ContaPagarTest extends TestCase
     public function test_post_documento_required_contapagar()
     {
         $response = $this->post('/api/contapagars',[
-            'emissao' => '2023-01-19',
-            'vencimento' => '2023-02-19',
+            'emissao' => Carbon::now()->format('Y-m-d'),
+            'vencimento' => Carbon::now()->addMonth(1)->format('Y-m-d'),
             'conta_id' => 1,
             'fornecedor_id' => 1,
             'valor' => 100.50,
@@ -64,7 +64,7 @@ class ContaPagarTest extends TestCase
     {
         $response = $this->post('/api/contapagars',[
             'documento' => '2023-2000',
-            'vencimento' => '2023-02-19',
+            'vencimento' => Carbon::now()->addMonth(1)->format('Y-m-d'),
             'conta_id' => 1,
             'fornecedor_id' => 1,
             'valor' => 100.50,
@@ -78,7 +78,7 @@ class ContaPagarTest extends TestCase
     {
         $response = $this->post('/api/contapagars',[
             'documento' => '2023-2000',
-            'emissao' => '2023-01-19',
+            'emissao' => Carbon::now()->format('Y-m-d'),
             'conta_id' => 1,
             'fornecedor_id' => 1,
             'valor' => 100.50,
@@ -92,8 +92,8 @@ class ContaPagarTest extends TestCase
     {
         $response = $this->post('/api/contapagars',[
             'documento' => '2023-2000',
-            'emissao' => '2023-01-19',
-            'vencimento' => '2023-02-19',
+            'emissao' => Carbon::now()->format('Y-m-d'),
+            'vencimento' => Carbon::now()->addMonth(1)->format('Y-m-d'),
             'fornecedor_id' => 1,
             'valor' => 100.50,
             'user_id' => 1
@@ -106,8 +106,8 @@ class ContaPagarTest extends TestCase
     {
         $response = $this->post('/api/contapagars',[
             'documento' => '2023-2000',
-            'emissao' => '2023-01-19',
-            'vencimento' => '2023-02-19',
+            'emissao' => Carbon::now()->format('Y-m-d'),
+            'vencimento' => Carbon::now()->addMonth(1)->format('Y-m-d'),
             'conta_id' => 1,
             'valor' => 100.50,
             'user_id' => 1
@@ -136,7 +136,7 @@ class ContaPagarTest extends TestCase
     public function test_put_vencimento_contapagar()
     {
         $response = $this->put('/api/contapagars/1',[
-            'vencimento'  => '2023-02-28'
+            'vencimento'  => Carbon::now()->addMonth(1)->format('Y-m-d')
         ]);
 
         $response->assertStatus(204);
@@ -172,7 +172,7 @@ class ContaPagarTest extends TestCase
     public function test_put_datapagamento_contapagar()
     {
         $response = $this->put('/api/contapagars/1',[
-            'data_pagamento'  => '2023-01-01'
+            'data_pagamento'  => Carbon::now()->format('Y-m-d')
         ]);
 
         $response->assertStatus(204);
@@ -182,8 +182,8 @@ class ContaPagarTest extends TestCase
     {
         $response = $this->post('/api/contapagars',[
             'documento' => '2023-1000',
-            'emissao' => '2023-01-19',
-            'vencimento' => '2023-02-19',
+            'emissao' => Carbon::now()->format('Y-m-d'),
+            'vencimento' => Carbon::now()->addMonth(1)->format('Y-m-d'),
             'conta_id' => 1,
             'fornecedor_id' => 1,
             'valor' => 100.50,
