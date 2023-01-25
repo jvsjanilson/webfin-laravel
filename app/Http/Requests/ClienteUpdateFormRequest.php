@@ -67,6 +67,14 @@ class ClienteUpdateFormRequest extends FormRequest
                     }
                 }
             ],
+
+            'logradouro' => ['filled'],
+            'numero' => ['filled'],
+            'cep' => ['filled'],
+            'bairro' => ['filled'],
+            'fone' => ['filled'],
+            'celular' => ['filled'],
+            'email' => ['filled'],
         ];
     }
 
