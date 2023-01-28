@@ -27,13 +27,9 @@ class EstadoTest extends TestCase
         ]);
 
         $response->assertCreated();
+
     }
 
-    public function test_get_estado()
-    {
-        $response = $this->get('/api/estados/1');
-        $response->assertOk();
-    }
 
     public function test_put_estado()
     {
@@ -73,5 +69,17 @@ class EstadoTest extends TestCase
         ]);
 
         $response->assertUnprocessable();
+    }
+
+    public function test_get_estado()
+    {
+        $response = $this->get('/api/estados/1');
+        $response->assertOk();
+        $response->assertJson([
+            "id" => 1,
+            "uf" => "RN",
+            "nome" => "Rio Grande do Norte",
+            "ativo" => 1
+        ]);
     }
 }
