@@ -12,7 +12,7 @@ class CidadeTest extends TestCase
     public function test_get_cidades()
     {
         $response = $this->get('/api/cidades');
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_post_cidade()
@@ -23,13 +23,13 @@ class CidadeTest extends TestCase
             'ativo' => true
         ]);
 
-        $response->assertStatus(201);
+        $response->assertCreated();
     }
 
     public function test_get_cidade()
     {
         $response = $this->get('/api/cidades/1');
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_put_cidade()
@@ -38,7 +38,7 @@ class CidadeTest extends TestCase
             'nome'  => 'Natal',
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_nome_vazio_cidade()
@@ -47,7 +47,7 @@ class CidadeTest extends TestCase
             'nome'  => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_estado_vazio_cidade()
@@ -56,7 +56,7 @@ class CidadeTest extends TestCase
             'estado_id'  => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_estado_required_cidade()
@@ -66,7 +66,7 @@ class CidadeTest extends TestCase
             'ativo' => true
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_nome_required_cidade()
@@ -76,7 +76,7 @@ class CidadeTest extends TestCase
             'ativo' => true
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
 }

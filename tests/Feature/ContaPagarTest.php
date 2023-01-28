@@ -12,7 +12,7 @@ class ContaPagarTest extends TestCase
     {
         $response = $this->get('/api/contapagars');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_post_contapagar()
@@ -37,7 +37,7 @@ class ContaPagarTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(201);
+        $response->assertCreated();
     }
 
     public function test_post_documento_required_contapagar()
@@ -51,7 +51,7 @@ class ContaPagarTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_emissao_required_contapagar()
@@ -65,7 +65,7 @@ class ContaPagarTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_vencimento_required_contapagar()
@@ -79,7 +79,7 @@ class ContaPagarTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_conta_required_contapagar()
@@ -93,7 +93,7 @@ class ContaPagarTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_fornecedor_required_contapagar()
@@ -107,14 +107,14 @@ class ContaPagarTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_get_contapagar()
     {
         $response = $this->get('/api/contapagars/1');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_put_contapagar()
@@ -123,7 +123,7 @@ class ContaPagarTest extends TestCase
             'valor'  => 12.25
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_vencimento_contapagar()
@@ -132,7 +132,7 @@ class ContaPagarTest extends TestCase
             'vencimento'  => Carbon::now()->addMonth(1)->format('Y-m-d')
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_desconto_contapagar()
@@ -141,7 +141,7 @@ class ContaPagarTest extends TestCase
             'desconto'  => 1.25
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_juros_contapagar()
@@ -150,7 +150,7 @@ class ContaPagarTest extends TestCase
             'juros'  => 3.25
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_multa_contapagar()
@@ -159,7 +159,7 @@ class ContaPagarTest extends TestCase
             'multa'  => 0.25
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_datapagamento_contapagar()
@@ -168,7 +168,7 @@ class ContaPagarTest extends TestCase
             'data_pagamento'  => Carbon::now()->format('Y-m-d')
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_post_unique_documento_contapagar()
@@ -183,7 +183,7 @@ class ContaPagarTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_unique_documento_contapagar()
@@ -192,7 +192,7 @@ class ContaPagarTest extends TestCase
             'documento' => '2023-1000',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_documento_vazio_contapagar()
@@ -201,7 +201,7 @@ class ContaPagarTest extends TestCase
             'documento' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_emissao_vazio_contapagar()
@@ -210,7 +210,7 @@ class ContaPagarTest extends TestCase
             'emissao' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_vencimento_vazio_contapagar()
@@ -219,7 +219,7 @@ class ContaPagarTest extends TestCase
             'vencimento' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_conta_id_vazio_contapagar()
@@ -228,7 +228,7 @@ class ContaPagarTest extends TestCase
             'conta_id' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_fornecedor_id_vazio_contapagar()
@@ -237,7 +237,7 @@ class ContaPagarTest extends TestCase
             'fornecedor_id' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_conta_id_not_exist_contapagar()
@@ -246,7 +246,7 @@ class ContaPagarTest extends TestCase
             'conta_id' => 100,
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_fornecedor_id_not_exist_contapagar()
@@ -255,14 +255,14 @@ class ContaPagarTest extends TestCase
             'fornecedor_id' => 100,
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_delete_contapagar()
     {
         $response = $this->delete('/api/contapagars/2');
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_baixar_contapagar()
@@ -270,7 +270,7 @@ class ContaPagarTest extends TestCase
         $response = $this->put('/api/contapagars/baixar/1', [
             "data_pagamento" => Carbon::now()->format('Y-m-d')
         ]);
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_baixar_error_contapagar()
@@ -280,12 +280,13 @@ class ContaPagarTest extends TestCase
         ]);
 
         $response->assertStatus(400);
+
     }
 
     public function test_estornar_contapagar()
     {
         $response = $this->put('/api/contapagars/estornar/1');
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_estornar_error_contapagar()

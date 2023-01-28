@@ -13,7 +13,7 @@ class ContaReceberTest extends TestCase
     {
         $response = $this->get('/api/contarecebers');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_post_contareceber()
@@ -38,7 +38,7 @@ class ContaReceberTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(201);
+        $response->assertCreated();
     }
 
     public function test_post_documento_required_contareceber()
@@ -52,7 +52,7 @@ class ContaReceberTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_emissao_required_contareceber()
@@ -66,7 +66,7 @@ class ContaReceberTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_vencimento_required_contareceber()
@@ -80,7 +80,7 @@ class ContaReceberTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_conta_required_contareceber()
@@ -94,7 +94,7 @@ class ContaReceberTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_cliente_required_contareceber()
@@ -108,7 +108,7 @@ class ContaReceberTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
 
@@ -116,7 +116,7 @@ class ContaReceberTest extends TestCase
     {
         $response = $this->get('/api/contarecebers/1');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_put_contareceber()
@@ -125,7 +125,8 @@ class ContaReceberTest extends TestCase
             'valor'  => 12.25
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
+
     }
 
     public function test_put_vencimento_contareceber()
@@ -134,7 +135,7 @@ class ContaReceberTest extends TestCase
             'vencimento'  => Carbon::now()->addMonth(1)->format('Y-m-d')
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_desconto_contareceber()
@@ -143,7 +144,7 @@ class ContaReceberTest extends TestCase
             'desconto'  => 1.25
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_juros_contareceber()
@@ -152,7 +153,7 @@ class ContaReceberTest extends TestCase
             'juros'  => 3.25
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_multa_contareceber()
@@ -161,7 +162,7 @@ class ContaReceberTest extends TestCase
             'multa'  => 0.25
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_datapagamento_contareceber()
@@ -170,7 +171,7 @@ class ContaReceberTest extends TestCase
             'data_pagamento'  => Carbon::now()->format('Y-m-d')
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_post_unique_documento_contareceber()
@@ -185,7 +186,7 @@ class ContaReceberTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
 
@@ -195,7 +196,7 @@ class ContaReceberTest extends TestCase
             'documento' => '2023-1000',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
 
@@ -205,7 +206,7 @@ class ContaReceberTest extends TestCase
             'documento' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_emissao_vazio_contareceber()
@@ -214,7 +215,7 @@ class ContaReceberTest extends TestCase
             'emissao' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_vencimento_vazio_contareceber()
@@ -223,7 +224,7 @@ class ContaReceberTest extends TestCase
             'vencimento' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_conta_id_vazio_contareceber()
@@ -232,7 +233,7 @@ class ContaReceberTest extends TestCase
             'conta_id' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_cliente_id_vazio_contareceber()
@@ -241,7 +242,7 @@ class ContaReceberTest extends TestCase
             'cliente_id' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
 
@@ -251,7 +252,7 @@ class ContaReceberTest extends TestCase
             'conta_id' => 100,
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_cliente_id_not_exist_contareceber()
@@ -260,14 +261,14 @@ class ContaReceberTest extends TestCase
             'cliente_id' => 100,
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_delete_contareceber()
     {
         $response = $this->delete('/api/contarecebers/2');
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_baixar_contareceber()
@@ -275,7 +276,7 @@ class ContaReceberTest extends TestCase
         $response = $this->put('/api/contarecebers/baixar/1', [
             "data_pagamento" => Carbon::now()->format('Y-m-d')
         ]);
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_baixar_error_contareceber()
@@ -290,7 +291,7 @@ class ContaReceberTest extends TestCase
     public function test_estornar_contareceber()
     {
         $response = $this->put('/api/contarecebers/estornar/1');
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_estornar_error_contareceber()

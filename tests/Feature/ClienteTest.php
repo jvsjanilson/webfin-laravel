@@ -13,7 +13,7 @@ class ClienteTest extends TestCase
 
         $response = $this->get('/api/clientes');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_post_cliente()
@@ -26,14 +26,14 @@ class ClienteTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(201);
+        $response->assertCreated();
     }
 
     public function test_get_cliente()
     {
         $response = $this->get('/api/clientes/1');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_put_cliente()
@@ -42,7 +42,7 @@ class ClienteTest extends TestCase
             'nome'  => 'Janilson Varela de Souza',
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_cpfcnpj_vazio_cliente()
@@ -51,7 +51,7 @@ class ClienteTest extends TestCase
             'cpfcnpj' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_nome_vazio_cliente()
@@ -60,7 +60,7 @@ class ClienteTest extends TestCase
             'nome'  => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_estado_vazio_cliente()
@@ -69,7 +69,7 @@ class ClienteTest extends TestCase
             'estado_id'  => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_cidade_vazio_cliente()
@@ -78,7 +78,7 @@ class ClienteTest extends TestCase
             'cidade_id'  => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
 
@@ -88,6 +88,6 @@ class ClienteTest extends TestCase
             'cpfcnpj' => '29140433844',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 }

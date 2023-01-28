@@ -10,7 +10,7 @@ class ContaTest extends TestCase
     public function test_get_contas()
     {
         $response = $this->get('/api/contas');
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_post_conta()
@@ -26,13 +26,13 @@ class ContaTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(201);
+        $response->assertCreated();
     }
 
     public function test_get_conta()
     {
         $response = $this->get('/api/contas/1');
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_put_conta()
@@ -41,7 +41,7 @@ class ContaTest extends TestCase
             'descricao' => 'BB 2 Cidade Alta',
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_numero_banco_vazio_conta()
@@ -50,7 +50,7 @@ class ContaTest extends TestCase
             'numero_banco' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_numero_agencia_vazio_conta()
@@ -59,7 +59,7 @@ class ContaTest extends TestCase
             'numero_agencia' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_numero_conta_vazio_conta()
@@ -68,7 +68,7 @@ class ContaTest extends TestCase
             'numero_conta' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_descricao_vazio_conta()
@@ -77,7 +77,7 @@ class ContaTest extends TestCase
             'descricao' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_tipo_conta_vazio_conta()
@@ -86,7 +86,7 @@ class ContaTest extends TestCase
             'tipo_conta' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_data_abertura_vazio_conta()
@@ -95,6 +95,6 @@ class ContaTest extends TestCase
             'data_abertura' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 }

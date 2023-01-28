@@ -13,7 +13,7 @@ class FornecedorTest extends TestCase
 
         $response = $this->get('/api/fornecedores');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_post_fornecedor()
@@ -26,14 +26,14 @@ class FornecedorTest extends TestCase
             'user_id' => 1
         ]);
 
-        $response->assertStatus(201);
+        $response->assertCreated();
     }
 
     public function test_get_fornecedor()
     {
         $response = $this->get('/api/fornecedores/1');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_put_fornecedor()
@@ -42,7 +42,7 @@ class FornecedorTest extends TestCase
             'nome'  => 'Fornecedor',
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_cpfcnpj_vazio_fornecedor()
@@ -51,7 +51,7 @@ class FornecedorTest extends TestCase
             'cpfcnpj' => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_nome_vazio_fornecedor()
@@ -60,7 +60,7 @@ class FornecedorTest extends TestCase
             'nome'  => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_estado_vazio_fornecedor()
@@ -69,7 +69,7 @@ class FornecedorTest extends TestCase
             'estado_id'  => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_cidade_vazio_fornecedor()
@@ -78,7 +78,7 @@ class FornecedorTest extends TestCase
             'cidade_id'  => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
 
@@ -88,6 +88,6 @@ class FornecedorTest extends TestCase
             'cpfcnpj' => '29140433844',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 }
