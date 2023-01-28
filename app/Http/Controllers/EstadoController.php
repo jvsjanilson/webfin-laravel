@@ -28,10 +28,8 @@ class EstadoController extends Controller
 
     public function store(EstadoFormRequest $request)
     {
-
         $this->model->store($request->all());
         return response('', Response::HTTP_CREATED);
-
     }
 
     public function show($id)
@@ -44,6 +42,7 @@ class EstadoController extends Controller
     {
         $this->model->update($request->all(), $id);
         return response()->json(null, Response::HTTP_NO_CONTENT);
+        
     }
 
     public function destroy($id)
