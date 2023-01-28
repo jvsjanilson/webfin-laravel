@@ -15,8 +15,7 @@ class EstadoTest extends TestCase
         ]);
 
         $response = $this->get('/api/estados');
-
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_post_estado()
@@ -27,14 +26,13 @@ class EstadoTest extends TestCase
             'ativo' => true
         ]);
 
-        $response->assertStatus(201);
+        $response->assertCreated();
     }
 
     public function test_get_estado()
     {
         $response = $this->get('/api/estados/1');
-
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_put_estado()
@@ -43,7 +41,7 @@ class EstadoTest extends TestCase
             'nome'  => 'Rio Grande do Norte',
         ]);
 
-        $response->assertStatus(204);
+        $response->assertNoContent();
     }
 
     public function test_put_uf_vazia_estado()
@@ -53,7 +51,7 @@ class EstadoTest extends TestCase
             'nome'  => 'teste',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_put_nome_vazio_estado()
@@ -63,7 +61,7 @@ class EstadoTest extends TestCase
             'nome'  => '',
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_post_unique_uf_estado()
@@ -74,6 +72,6 @@ class EstadoTest extends TestCase
             'ativo' => true
         ]);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 }
