@@ -3,17 +3,11 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ContaPagarTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
     public function test_get_contapagars()
     {
         $response = $this->get('/api/contapagars');
@@ -116,7 +110,6 @@ class ContaPagarTest extends TestCase
         $response->assertStatus(422);
     }
 
-
     public function test_get_contapagar()
     {
         $response = $this->get('/api/contapagars/1');
@@ -193,7 +186,6 @@ class ContaPagarTest extends TestCase
         $response->assertStatus(422);
     }
 
-
     public function test_put_unique_documento_contapagar()
     {
         $response = $this->put('/api/contapagars/2',[
@@ -202,7 +194,6 @@ class ContaPagarTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function test_put_documento_vazio_contapagar()
     {
@@ -248,7 +239,6 @@ class ContaPagarTest extends TestCase
 
         $response->assertStatus(422);
     }
-
 
     public function test_put_conta_id_not_exist_contapagar()
     {
