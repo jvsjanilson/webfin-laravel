@@ -10,7 +10,6 @@ class ContaTest extends TestCase
     public function test_get_contas()
     {
         $response = $this->get('/api/contas');
-
         $response->assertStatus(200);
     }
 
@@ -33,7 +32,6 @@ class ContaTest extends TestCase
     public function test_get_conta()
     {
         $response = $this->get('/api/contas/1');
-
         $response->assertStatus(200);
     }
 
