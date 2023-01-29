@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Contracts\IEstado;
+use App\Contracts\ICidade;
 use App\Models\Cidade;
 
-class CidadeImpl extends AbstractRepos implements IEstado
+class CidadeImpl extends AbstractRepos implements ICidade
 {
     public $model;
 
