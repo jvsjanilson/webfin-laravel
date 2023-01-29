@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->group(function () {
+// Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/estados', EstadoController::class);
     Route::apiResource('/cidades', CidadeController::class);
     Route::apiResource('/clientes', ClienteController::class);
@@ -35,4 +35,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/contapagars/baixar/{id}', [ContaPagarController::class, 'baixar']);
     Route::put('/contapagars/estornar/{id}', [ContaPagarController::class, 'estornar']);
 
-});
+// });
