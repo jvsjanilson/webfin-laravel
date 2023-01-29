@@ -27,9 +27,7 @@ class EstadoTest extends TestCase
         ]);
 
         $response->assertCreated();
-
     }
-
 
     public function test_put_estado()
     {

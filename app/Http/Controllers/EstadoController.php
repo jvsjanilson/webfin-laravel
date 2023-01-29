@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\EstadoInterface;
+use App\Contracts\IEstado;
 use App\Http\Requests\EstadoFormRequest;
 use App\Http\Requests\EstadoUpdateFormRequest;
 use App\Http\Resources\EstadoCollection;
@@ -15,7 +15,7 @@ class EstadoController extends Controller
 
     private $model;
 
-    public function __construct(EstadoInterface $model)
+    public function __construct(IEstado $model)
     {
         $this->model = $model;
     }
@@ -42,7 +42,7 @@ class EstadoController extends Controller
     {
         $this->model->update($request->all(), $id);
         return response()->json(null, Response::HTTP_NO_CONTENT);
-        
+
     }
 
     public function destroy($id)

@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Contracts\EstadoInterface;
+use App\Contracts\IEstado;
 use App\Models\Estado;
 
 
-class EstadoRepo extends AbstractRepos implements EstadoInterface
+class EstadoImpl extends AbstractRepos implements IEstado
 {
     public $model;
 
