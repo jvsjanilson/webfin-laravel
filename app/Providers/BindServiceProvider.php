@@ -16,6 +16,7 @@ class BindServiceProvider extends ServiceProvider
     {
         App::bind('App\Contracts\IEstado','App\Repositories\EstadoImpl');
         App::bind('App\Contracts\ICidade','App\Repositories\CidadeImpl');
+        App::bind('App\Contracts\IConta','App\Repositories\ContaImpl');
     }
 
     /**
