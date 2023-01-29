@@ -19,6 +19,7 @@ class BindServiceProvider extends ServiceProvider
         App::bind('App\Contracts\IConta','App\Repositories\ContaImpl');
         App::bind('App\Contracts\ICliente','App\Repositories\ClienteImpl');
         App::bind('App\Contracts\IFornecedor','App\Repositories\FornecedorImpl');
+        App::bind('App\Contracts\IContaReceber','App\Repositories\ContaReceberImpl');
     }
 
     /**
