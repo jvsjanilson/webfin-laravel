@@ -15,6 +15,7 @@ class BindServiceProvider extends ServiceProvider
     public function register()
     {
         App::bind('App\Contracts\IEstado','App\Repositories\EstadoImpl');
+        App::bind('App\Contracts\ICidade','App\Repositories\CidadeImpl');
     }
 
     /**
