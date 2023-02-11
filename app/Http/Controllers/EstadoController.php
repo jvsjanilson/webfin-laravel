@@ -7,6 +7,7 @@ use App\Http\Requests\EstadoFormRequest;
 use App\Http\Requests\EstadoUpdateFormRequest;
 use App\Http\Resources\EstadoCollection;
 use App\Http\Resources\EstadoResource;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class EstadoController extends Controller
@@ -46,5 +47,19 @@ class EstadoController extends Controller
     {
         $this->model->destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function findByUF(Request $request, $uf)
+    {
+
+        $reg = $this->model->findByUF($uf);
+        return $reg;
+        //return response()->json(new EstadoResource($reg));
+    }
+
+    public function all()
+    {
+        $reg = $this->model->all();
+        return response()->json(new EstadoCollection($reg));;
     }
 }
