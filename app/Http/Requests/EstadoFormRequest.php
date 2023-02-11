@@ -34,7 +34,7 @@ class EstadoFormRequest extends FormRequest
                     }
                 }
            }],
-           'nome' => ['required']
+           'nome' => ['required', 'max:120']
         ];
     }
 
