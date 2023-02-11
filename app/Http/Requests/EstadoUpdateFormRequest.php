@@ -40,7 +40,7 @@ class EstadoUpdateFormRequest extends FormRequest
                     }
                 },
             ],
-            'nome' => ['filled']
+            'nome' => ['filled', 'max:120']
         ];
     }
 
