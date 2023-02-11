@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 // Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/estados', EstadoController::class);
+    Route::get('/estados/search/all', [EstadoController::class, 'all']);
+    Route::get('/estados/search/{uf}', [EstadoController::class, 'findByUF']);
+
+
     Route::apiResource('/cidades', CidadeController::class);
     Route::apiResource('/clientes', ClienteController::class);
     Route::apiResource('/fornecedores', FornecedorController::class);
