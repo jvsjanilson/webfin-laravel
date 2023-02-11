@@ -12,7 +12,8 @@ abstract class AbstractRepos
 {
     public function findAll()
     {
-        return $this->model->paginate(config('app.paginate'));
+        return $this->model->orderBy('id', 'desc')
+            ->paginate(config('app.paginate'));
     }
 
     public function findOne($id)
