@@ -28,7 +28,7 @@ class ClienteFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => ['required'],
+            'nome' => ['required', 'max:60'],
             'cpfcnpj' => [function($attribute, $value, $fail) {
                 if ($value != "") {
                     $reg = Cliente::where('cpfcnpj', $value)->first();
