@@ -27,4 +27,11 @@ class CidadeImpl extends AbstractRepos implements ICidade
             ->orderBy('id', 'desc')->paginate(config('app.paginate'));
         return $reg;
     }
+
+    public function findCidadeByEstado($estado_id)
+    {
+        return $this->model
+            ->where('estado_id', $estado_id)
+            ->get();
+    }
 }
