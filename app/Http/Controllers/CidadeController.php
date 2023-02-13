@@ -47,4 +47,10 @@ class CidadeController extends Controller
         $this->model->destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function findCidadeByEstado($estado_id)
+    {
+        $regs = $this->model->findCidadeByEstado($estado_id);
+        return new CidadeCollection($regs);
+    }
 }
