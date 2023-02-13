@@ -13,4 +13,21 @@ class ContaImpl extends AbstractRepos implements IConta
     {
         $this->model = $model;
     }
+
+    public function findAll()
+    {
+        $search = request()->nome;
+
+        $regs =  $this->model
+            ->when($search != "", function($q) use ($search) {
+                $q->where(function($query) use ($search) {
+                    $query->where('descricao', 'like', '%'. $search.'%');
+                    $query->orWhere('numero_banco', 'like', '%'. $search.'%');
+                    $query->orWhere('numero_agencia', 'like', '%'. $search.'%');
+                    $query->orWhere('numero_conta', 'like', '%'. $search.'%');
+                });
+            })
+            ->orderBy('id', 'desc')->paginate(config('app.paginate'));
+        return $regs;
+    }
 }
