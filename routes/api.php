@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 
 
     Route::apiResource('/cidades', CidadeController::class);
+    Route::get('/cidades/lookup/{estado_id}', [CidadeController::class, 'findCidadeByEstado']);
+
     Route::apiResource('/clientes', ClienteController::class);
     Route::apiResource('/fornecedores', FornecedorController::class);
     Route::apiResource('/contas', ContaController::class);
