@@ -29,8 +29,8 @@ class ClienteUpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => ['filled'],
-            'cpfcnpj' => ['filled',
+            'nome' => ['filled', 'max:60'],
+            'cpfcnpj' => [
                 function($attribute, $value, $fail) {
                 if ($value != "") {
 
@@ -68,13 +68,13 @@ class ClienteUpdateFormRequest extends FormRequest
                 }
             ],
 
-            'logradouro' => ['filled'],
-            'numero' => ['filled'],
-            'cep' => ['filled'],
-            'bairro' => ['filled'],
-            'fone' => ['filled'],
-            'celular' => ['filled'],
-            'email' => ['filled'],
+            // 'logradouro' => ['filled'],
+            // 'numero' => ['filled'],
+            // 'cep' => ['filled'],
+            // 'bairro' => ['filled'],
+            // 'fone' => ['filled'],
+            // 'celular' => ['filled'],
+            // 'email' => ['filled'],
         ];
     }
 
