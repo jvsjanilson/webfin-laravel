@@ -26,7 +26,8 @@ class ContaUpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'numero_banco' => ['max:4', 'regex:/^[A-Za-z0-9]*$/', 'filled'],
+            'numero_banco' => ['max:4', 'filled'],
+            // 'numero_banco' => ['max:4', 'regex:/^[A-Za-z0-9]*$/', 'filled'],
             'numero_agencia' => ['max:15','filled'],
             'numero_conta' => ['max:30', 'filled'],
             'descricao' => ['max:60', 'filled'],
