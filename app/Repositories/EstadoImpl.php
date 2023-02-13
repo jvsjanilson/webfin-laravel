@@ -17,7 +17,7 @@ class EstadoImpl extends AbstractRepos implements IEstado
 
     public function all()
     {
-        return $this->model->all();
+        return $this->model->orderBy('uf')->get();
     }
 
     public function findAll()
