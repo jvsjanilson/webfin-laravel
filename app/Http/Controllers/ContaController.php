@@ -45,4 +45,10 @@ class ContaController extends Controller
         $this->model->destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+      public function all()
+    {
+        $reg = $this->model->all();
+        return response()->json(new ContaCollection($reg));
+    }
 }
