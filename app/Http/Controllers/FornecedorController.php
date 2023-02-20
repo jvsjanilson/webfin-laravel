@@ -6,6 +6,7 @@ use App\Contracts\IFornecedor;
 use App\Http\Requests\FornecedorFormRequest;
 use App\Http\Requests\FornecedorUpdateFormRequest;
 use App\Http\Resources\FornecedorCollection;
+use App\Http\Resources\FornecedorLookupResource;
 use App\Http\Resources\FornecedorResource;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -44,5 +45,18 @@ class FornecedorController extends Controller
     {
         $this->model->destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function findByCpfcnpj($cpfcnpj)
+    {
+        $reg = $this->model->findByCpfcnpj($cpfcnpj);
+
+        return response()->json($reg);
+    }
+
+      public function all()
+    {
+        $reg = $this->model->all();
+        return response()->json(FornecedorLookupResource::collection($reg));
     }
 }
