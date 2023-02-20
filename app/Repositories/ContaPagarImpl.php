@@ -74,4 +74,21 @@ class ContaPagarImpl extends AbstractRepos implements IContaPagar
             throw new ExceptionErrorEstorno();
         }
     }
+
+    public function findAll()
+    {
+        $search = request()->nome;
+
+        $regs =  $this->model->select('conta_pagars.*', 'fornecedors.nome')
+            ->join('fornecedors', 'fornecedors.id', '=', 'conta_pagars.fornecedor_id')
+            ->when($search != "", function($q) use ($search) {
+                $q->where(function($query) use ($search) {
+                    $query->where('conta_pagars.documento', 'like', '%'. $search.'%');
+                    $query->orWhere('fornecedors.nome', 'like',  '%'. $search.'%');
+                    
+                });
+            })
+            ->orderBy('conta_pagars.id', 'desc')->paginate(config('app.paginate'));
+        return $regs;
+    }
 }
