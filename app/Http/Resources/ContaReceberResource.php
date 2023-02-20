@@ -24,8 +24,16 @@ class ContaReceberResource extends JsonResource
             'juros'         => $this->juros,
             'multa'         => $this->multa,
             'data_pagamento'=> $this->data_pagamento,
+            'total_pago'    => !is_null($this->data_pagamento) ? ($this->valor + $this->juros + $this->multa - $this->desconto) : 0,
+            // 'total_pago'    => $this->when(!is_null($this->data_pagamento), $this->valor + $this->juros + $this->multa - $this->desconto),
             'conta_id'      => $this->conta_id,
             'cliente_id'    => $this->cliente_id,
+            'cliente'       => [
+               'nome' => $this->cliente->nome,
+               'cpfcnpj' => $this->cliente->cpfcnpj,
+               'celular' => $this->cliente->celular,
+
+            ]
         ];
     }
 }
