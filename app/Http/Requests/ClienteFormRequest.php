@@ -57,6 +57,14 @@ class ClienteFormRequest extends FormRequest
                     }
                 }
             ],
+            'cep'           => ['max:9'],
+            'nome_fantasia' => ['max:60'],
+            'cpfcnpj'       => ['max:14'],
+            'logradouro'    => ['max:60'],
+            'numero'        => ['max:30'],
+            'complemento'   => ['max:60'],
+            'bairro'        => ['max:60'],
+
 
         ];
     }
@@ -64,10 +72,17 @@ class ClienteFormRequest extends FormRequest
     public function attributes()
     {
         return [
-            'nome'      => 'Nome do cliente',
-            'cpfcnpj'   => 'CPF/CNPJ',
-            'estado_id' => 'Estado',
-            'cidade_id' => 'Cidade'
+            'nome'          => 'Nome do cliente',
+            'cpfcnpj'       => 'CPF/CNPJ',
+            'estado_id'     => 'Estado',
+            'cidade_id'     => 'Cidade',
+            'cep'           => 'CEP',
+            'nome_fantasia' => 'Nome Fantasia',
+            'cpfcnpj'       => 'CPF/CNPJ',
+            'logradouro'    => 'Logradouro',
+            'numero'        => 'Número',
+            'complemento'   => 'Complemento',
+            'bairro'        => 'Bairro',
         ];
     }
 }
