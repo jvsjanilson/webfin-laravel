@@ -30,12 +30,19 @@ use Illuminate\Support\Facades\Route;
     Route::get('/cidades/lookup/{estado_id}', [CidadeController::class, 'findCidadeByEstado']);
 
     Route::apiResource('/clientes', ClienteController::class);
+    Route::get('/clientes/find/cpfcnpj/{cpfcnpj}', [ClienteController::class, 'findByCpfcnpj']);
+    Route::get('/clientes/search/all', [ClienteController::class, 'all']);
     Route::apiResource('/fornecedores', FornecedorController::class);
+    Route::get('/fornecedores/find/cpfcnpj/{cpfcnpj}', [FornecedorController::class, 'findByCpfcnpj']);
+    Route::get('/fornecedores/search/all', [FornecedorController::class, 'all']);
+
     Route::apiResource('/contas', ContaController::class);
+    Route::get('/contas/search/all', [ContaController::class, 'all']);
 
     Route::apiResource('/contarecebers', ContaReceberController::class);
     Route::put('/contarecebers/baixar/{id}', [ContaReceberController::class, 'baixar']);
     Route::put('/contarecebers/estornar/{id}', [ContaReceberController::class, 'estornar']);
+    Route::get('/contarecebers/find/documento/{documento}', [ContaReceberController::class, 'findByDocumento']);
 
     Route::apiResource('/contapagars', ContaPagarController::class);
     Route::put('/contapagars/baixar/{id}', [ContaPagarController::class, 'baixar']);
