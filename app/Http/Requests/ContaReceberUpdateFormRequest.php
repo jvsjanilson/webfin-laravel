@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Cliente;
 use App\Models\Conta;
+use App\Models\ContaReceber;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContaReceberUpdateFormRequest extends FormRequest
@@ -26,7 +27,21 @@ class ContaReceberUpdateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'documento'     => ['filled', 'max:30', "unique:conta_recebers,documento,except,$this->id"],
+            'documento'     => ['filled', 'max:30', 
+                function($attribute, $value, $fail)
+                {
+                    
+                    if ($value != "") {
+                        $reg = ContaReceber::where($attribute, $value)
+                            ->where('conta_recebers.id', '<>', $this->route('contareceber'))
+                            ->first();
+
+                        if (isset($reg)) {
+                            $fail("A :attribute já cadastrado.");
+                        }
+                    }
+                },
+        ],
             'emissao'       => ['filled'],
             'vencimento'    => ['filled'],
             'conta_id'      => ['filled', 'integer',
