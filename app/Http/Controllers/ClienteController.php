@@ -6,6 +6,7 @@ use App\Contracts\ICliente;
 use App\Http\Requests\ClienteFormRequest;
 use App\Http\Requests\ClienteUpdateFormRequest;
 use App\Http\Resources\ClienteCollection;
+use App\Http\Resources\ClienteLookupResource;
 use App\Http\Resources\ClienteResource;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -44,5 +45,18 @@ class ClienteController extends Controller
     {
         $this->model->destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function findByCpfcnpj($cpfcnpj)
+    {
+        $reg = $this->model->findByCpfcnpj($cpfcnpj);
+
+        return response()->json($reg);
+    }
+
+    public function all()
+    {
+        $reg = $this->model->all();
+        return response()->json(ClienteLookupResource::collection($reg));
     }
 }
