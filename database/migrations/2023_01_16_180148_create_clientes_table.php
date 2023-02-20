@@ -20,7 +20,7 @@ class CreateClientesTable extends Migration
             $table->string('cpfcnpj',14)->nullable()->default('');
             $table->string('logradouro',60)->nullable()->default('');
             $table->string('numero',30)->nullable()->default('');
-            $table->string('cep',8)->nullable()->default('');
+            $table->string('cep',9)->nullable()->default('');
             $table->string('complemento',60)->nullable()->default('');
             $table->string('bairro',60)->nullable()->default('');
 

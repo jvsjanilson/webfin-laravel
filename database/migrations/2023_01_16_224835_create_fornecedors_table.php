@@ -15,14 +15,14 @@ class CreateFornecedorsTable extends Migration
     {
         Schema::create('fornecedors', function (Blueprint $table) {
             $table->id();
-            $table->string('nome',120)->nullable();
-            $table->string('nome_fantasia',120)->nullable();
-            $table->string('cpfcnpj',14)->nullable();
-            $table->string('logradouro',60)->nullable();
-            $table->string('numero',30)->nullable();
-            $table->string('cep',8)->nullable();
-            $table->string('complemento',60)->nullable();
-            $table->string('bairro',60)->nullable();
+            $table->string('nome',60)->nullable()->default('');
+            $table->string('nome_fantasia',60)->nullable()->default('');
+            $table->string('cpfcnpj',14)->nullable()->default('');
+            $table->string('logradouro',60)->nullable()->default('');
+            $table->string('numero',30)->nullable()->default('');
+            $table->string('cep',9)->nullable()->default('');
+            $table->string('complemento',60)->nullable()->default('');
+            $table->string('bairro',60)->nullable()->default('');
 
             $table->unsignedBigInteger('estado_id');
             $table->foreign('estado_id')->references('id')->on('estados')->cascade();
