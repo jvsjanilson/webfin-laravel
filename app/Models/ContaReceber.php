@@ -19,6 +19,7 @@ class ContaReceber extends Model
         'conta_id',
         'cliente_id',
         'user_id',
+        
     ];
 
     /**
@@ -30,8 +31,8 @@ class ContaReceber extends Model
         return $this->belongsTo(Conta::class);
     }
 
-    public function fornecedor()
+    public function cliente()
     {
-        return $this->belongsTo(Fornecedor::class);
+        return $this->belongsTo(Cliente::class);
     }
 }
