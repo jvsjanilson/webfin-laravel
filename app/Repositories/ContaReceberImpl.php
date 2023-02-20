@@ -27,6 +27,8 @@ class ContaReceberImpl extends AbstractRepos implements IContaReceber
 
         //$data = $request->only('juros', 'multa', 'desconto', 'data_pagamento');
 
+
+        //dd($data['data_pagamento']);
         $reg = $this->model->find($id);
 
         if (!isset($reg))
@@ -41,6 +43,7 @@ class ContaReceberImpl extends AbstractRepos implements IContaReceber
         $reg->multa          = isset($data['multa']) ? $data['multa'] : 0;
         $reg->desconto       = isset($data['desconto']) ? $data['desconto'] : 0;
         $reg->data_pagamento = $data['data_pagamento'];
+        //dd($reg->data_pagamento);
 
         $valor_pago = ($reg->valor + $reg->juros + $reg->multa-$reg->desconto);
 
@@ -80,5 +83,38 @@ class ContaReceberImpl extends AbstractRepos implements IContaReceber
         } catch (\Throwable $th) {
             throw new ExceptionErrorEstorno();
         }
+    }
+
+    public function findAll()
+    {
+        $search = request()->nome;
+
+        $regs =  $this->model->select('conta_recebers.*', 'clientes.nome')
+            ->join('clientes', 'clientes.id', '=', 'conta_recebers.cliente_id')
+            ->when($search != "", function($q) use ($search) {
+                $q->where(function($query) use ($search) {
+                    $query->where('documento', 'like', '%'. $search.'%');
+                    $query->orWhere('clientes.nome', 'like',  '%'. $search.'%');
+                    
+                });
+            })
+            ->orderBy('id', 'desc')->paginate(config('app.paginate'));
+        return $regs;
+    }
+
+
+    public function findByDocumento($documento)
+    {
+        $id = request()->id;
+
+        $reg = $this->model->select('documento')
+            ->when(isset($id), function($q) use ($id) {
+                $q->where(function($query) use ($id) {
+                    $query->where('id', '<>', $id);
+                });
+            })
+            ->where('documento', $documento)
+            ->first();
+        return $reg;
     }
 }
