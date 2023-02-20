@@ -57,4 +57,11 @@ class ContaReceberController extends Controller
     {
         $this->model->estornar($id);
     }
+
+     public function findByDocumento($documento)
+    {
+        $reg = $this->model->findByDocumento($documento);
+
+        return response()->json($reg);
+    }
 }
