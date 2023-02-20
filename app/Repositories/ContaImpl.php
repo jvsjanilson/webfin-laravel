@@ -30,4 +30,12 @@ class ContaImpl extends AbstractRepos implements IConta
             ->orderBy('id', 'desc')->paginate(config('app.paginate'));
         return $regs;
     }
+
+     public function all()
+    {
+        return $this->model
+            ->orderBy('numero_banco')
+            ->orderBy('numero_agencia')
+            ->orderBy('numero_conta')->get();
+    }
 }
