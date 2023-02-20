@@ -23,10 +23,16 @@ class ContaPagarResource extends JsonResource
             'desconto'      => (float)$this->desconto,
             'juros'         => (float)$this->juros,
             'multa'         => (float)$this->multa,
-            'valor_pago'    => (float)$this->when($this->data_pagamento != "",($this->valor+$this->juros+$this->multa-$this->desconto),'0.00'),
+            'total_pago'    => !is_null($this->data_pagamento) ? ($this->valor + $this->juros + $this->multa - $this->desconto) : 0,
             'data_pagamento'=> $this->data_pagamento,
             'conta_id'      => $this->conta_id,
             'fornecedor_id' => $this->fornecedor_id,
+            'fornecedor' => [
+               'nome' => $this->fornecedor->nome,
+               'cpfcnpj' => $this->fornecedor->cpfcnpj,
+               'celular' => $this->fornecedor->celular,
+
+            ]
         ];
     }
 }
