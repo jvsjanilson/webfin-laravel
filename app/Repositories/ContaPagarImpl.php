@@ -7,6 +7,7 @@ use App\Exceptions\ExceptionErrorBaixa;
 use App\Exceptions\ExceptionErrorEstorno;
 use App\Exceptions\ExceptionErrorUpdate;
 use App\Exceptions\ExceptionNotFound;
+use App\Models\Conta;
 use App\Models\ContaPagar;
 
 class ContaPagarImpl extends AbstractRepos implements IContaPagar
@@ -33,17 +34,33 @@ class ContaPagarImpl extends AbstractRepos implements IContaPagar
         $reg->juros          = isset($data['juros']) ? $data['juros'] : 0;
         $reg->multa          = isset($data['multa']) ? $data['multa'] : 0;
         $reg->desconto       = isset($data['desconto']) ? $data['desconto'] : 0;
+        $conta_id            = isset($data['conta_id']) ? (int)$data['conta_id'] : 0;
         $reg->data_pagamento = $data['data_pagamento'];
+
 
         $valor_pago = ($reg->valor + $reg->juros + $reg->multa-$reg->desconto);
 
-        if ($reg->conta->saldo < $valor_pago)
-            throw new ExceptionErrorBaixa("Saldo Insuficiente");
+        if ($conta_id == 0) {
+            if ($reg->conta->saldo < $valor_pago)
+                throw new ExceptionErrorBaixa("Saldo Insuficientes");
+        } else {
+            $conta = Conta::find($conta_id);
+            if ($conta->saldo < $valor_pago)
+                throw new ExceptionErrorBaixa("Saldo Insuficiente");
+        }
 
         try {
-            $reg->save();
-            $reg->conta->saldo -= $valor_pago;
-            $reg->conta->save();
+            
+             if ($conta_id == 0) {
+                $reg->conta->saldo -= $valor_pago;
+                $reg->conta->save();
+                $reg->save();
+            } else {
+                 $conta->saldo -= $valor_pago;
+                 $conta->save();
+                 $reg->conta_id = $conta->id;
+                 $reg->save();
+            }
         } catch (\Throwable $th) {
             throw new ExceptionErrorUpdate();
         }
@@ -85,10 +102,25 @@ class ContaPagarImpl extends AbstractRepos implements IContaPagar
                 $q->where(function($query) use ($search) {
                     $query->where('conta_pagars.documento', 'like', '%'. $search.'%');
                     $query->orWhere('fornecedors.nome', 'like',  '%'. $search.'%');
-                    
+
                 });
             })
             ->orderBy('conta_pagars.id', 'desc')->paginate(config('app.paginate'));
         return $regs;
+    }
+
+    public function findByDocumento($documento)
+    {
+        $id = request()->id;
+
+        $reg = $this->model->select('documento')
+            ->when(isset($id), function($q) use ($id) {
+                $q->where(function($query) use ($id) {
+                    $query->where('id', '<>', $id);
+                });
+            })
+            ->where('documento', $documento)
+            ->first();
+        return $reg;
     }
 }
