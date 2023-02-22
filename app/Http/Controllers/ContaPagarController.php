@@ -49,12 +49,19 @@ class ContaPagarController extends Controller
 
     public function baixar(ContaPagarBaixaFormRequest $request, $id)
     {
-        $data = $request->only('juros', 'multa', 'desconto', 'data_pagamento');
+        $data = $request->only('juros', 'multa', 'desconto', 'data_pagamento', 'conta_id');
         $this->model->baixar($data, $id);
     }
 
     public function estornar($id)
     {
         $this->model->estornar($id);
+    }
+
+    public function findByDocumento($documento)
+    {
+        $reg = $this->model->findByDocumento($documento);
+
+        return response()->json($reg);
     }
 }
