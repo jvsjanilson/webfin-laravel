@@ -7,6 +7,8 @@ use App\Http\Controllers\ContaPagarController;
 use App\Http\Controllers\ContaReceberController;
 use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +22,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return auth()->user();
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/estados', EstadoController::class);
     Route::get('/estados/search/all', [EstadoController::class, 'all']);
     Route::get('/estados/search/{uf}', [EstadoController::class, 'findByUF']);
@@ -32,6 +38,7 @@ use Illuminate\Support\Facades\Route;
     Route::apiResource('/clientes', ClienteController::class);
     Route::get('/clientes/find/cpfcnpj/{cpfcnpj}', [ClienteController::class, 'findByCpfcnpj']);
     Route::get('/clientes/search/all', [ClienteController::class, 'all']);
+
     Route::apiResource('/fornecedores', FornecedorController::class);
     Route::get('/fornecedores/find/cpfcnpj/{cpfcnpj}', [FornecedorController::class, 'findByCpfcnpj']);
     Route::get('/fornecedores/search/all', [FornecedorController::class, 'all']);
@@ -47,5 +54,9 @@ use Illuminate\Support\Facades\Route;
     Route::apiResource('/contapagars', ContaPagarController::class);
     Route::put('/contapagars/baixar/{id}', [ContaPagarController::class, 'baixar']);
     Route::put('/contapagars/estornar/{id}', [ContaPagarController::class, 'estornar']);
+    Route::get('/contapagars/find/documento/{documento}', [ContaPagarController::class, 'findByDocumento']);
 
-// });
+});
+
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout']);
