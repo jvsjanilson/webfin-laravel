@@ -29,7 +29,7 @@ class FornecedorUpdateFormRequest extends FormRequest
     {
         return [
             'nome' => ['filled'],
-            'cpfcnpj' => ['filled',
+            'cpfcnpj' => [
                 function($attribute, $value, $fail) {
                 if ($value != "") {
                     $reg = Fornecedor::where('cpfcnpj', $value)->first();
