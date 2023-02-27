@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ContaController;
@@ -60,3 +61,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout']);
+Route::post('register', [RegisterController::class, 'register']);
